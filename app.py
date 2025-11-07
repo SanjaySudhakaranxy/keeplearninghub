@@ -500,4 +500,5 @@ def clear_results():
     return redirect(url_for('results_page'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # For production, set debug=False
+    app.run(debug=True)  # Change to debug=False on live server
