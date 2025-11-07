@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,32 +6,43 @@
     <title>KEEPLEARNING HUB - Login</title>
     <link rel="stylesheet" href="/static/style.css" />
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
-        background: #1a1a1a;
+        background: linear-gradient(
+          135deg,
+          #0a0a0a 0%,
+          #1a1a1a 50%,
+          #0f0f0f 100%
+        );
         color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        margin: 0;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
       .login-container {
         width: 100%;
-        max-width: 400px;
-        padding: 40px;
-        background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
-        border: 1px solid #444;
-        border-radius: 12px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-        animation: slideIn 0.5s ease-out;
+        max-width: 450px;
+        padding: 60px 40px;
+        background: rgba(30, 30, 30, 0.4);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 0.6s ease-out;
       }
 
-      @keyframes slideIn {
+      @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translateY(-20px);
+          transform: translateY(20px);
         }
         to {
           opacity: 1;
@@ -42,45 +52,50 @@
 
       .login-header {
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 50px;
       }
 
-      .login-logo {
-        width: 60px;
-        height: 60px;
-        margin: 0 auto 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #4caf50, #45a049);
-        border-radius: 12px;
-        font-size: 32px;
-        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+      .login-emoji {
+        font-size: 48px;
+        margin-bottom: 20px;
+        display: inline-block;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
       }
 
       .login-title {
-        font-size: 28px;
-        font-weight: bold;
-        color: #4caf50;
-        margin: 0;
-        letter-spacing: 1px;
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
       .login-subtitle {
-        font-size: 12px;
-        color: #aaa;
-        margin: 8px 0 0 0;
-        text-transform: uppercase;
+        font-size: 14px;
+        color: #888;
         letter-spacing: 2px;
+        text-transform: uppercase;
       }
 
       .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 24px;
       }
 
       .form-group label {
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         font-size: 13px;
         font-weight: 600;
         color: #bbb;
@@ -90,63 +105,67 @@
 
       .form-group input {
         width: 100%;
-        padding: 12px 16px;
-        background: #1a1a1a;
-        border: 1px solid #444;
-        border-radius: 6px;
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
         color: #fff;
         font-size: 14px;
         transition: all 0.3s ease;
-        box-sizing: border-box;
-      }
-
-      .form-group input:focus {
-        outline: none;
-        border-color: #4caf50;
-        box-shadow: 0 0 10px rgba(76, 175, 80, 0.2);
-        background: #262626;
+        backdrop-filter: blur(10px);
       }
 
       .form-group input::placeholder {
         color: #666;
       }
 
+      .form-group input:focus {
+        outline: none;
+        border-color: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+      }
+
       .login-btn {
         width: 100%;
         padding: 14px 20px;
-        background: linear-gradient(135deg, #4caf50, #45a049);
+        background: linear-gradient(135deg, #fff 0%, #d0d0d0 100%);
         border: none;
-        border-radius: 6px;
-        color: white;
+        border-radius: 8px;
+        color: #000;
         font-size: 14px;
-        font-weight: bold;
-        text-transform: uppercase;
+        font-weight: 700;
         letter-spacing: 1px;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        text-transform: uppercase;
+        margin-top: 10px;
       }
 
       .login-btn:hover {
-        background: linear-gradient(135deg, #45a049, #3d8b40);
-        box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
         transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
       }
 
       .login-btn:active {
         transform: translateY(0);
       }
 
+      .login-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
       .error-message {
         display: none;
         padding: 12px 16px;
-        background: #ff6b6b;
-        border: 1px solid #ff5252;
-        border-radius: 6px;
-        color: #fff;
+        background: rgba(255, 59, 48, 0.1);
+        border: 1px solid rgba(255, 59, 48, 0.3);
+        border-radius: 8px;
+        color: #ff9999;
         font-size: 13px;
         margin-bottom: 20px;
-        animation: shake 0.5s ease-in-out;
+        animation: shake 0.4s ease-in-out;
       }
 
       .error-message.show {
@@ -169,9 +188,9 @@
       .loading {
         display: none;
         text-align: center;
-        color: #4caf50;
+        color: #888;
         font-size: 13px;
-        margin-top: 10px;
+        margin-top: 15px;
       }
 
       .loading.show {
@@ -180,11 +199,11 @@
 
       .spinner {
         display: inline-block;
-        width: 4px;
-        height: 4px;
-        background: #4caf50;
+        width: 6px;
+        height: 6px;
+        background: #888;
         border-radius: 50%;
-        margin-right: 6px;
+        margin-right: 8px;
         animation: spin 1.2s infinite;
       }
 
@@ -202,38 +221,59 @@
         text-align: center;
         font-size: 12px;
         color: #666;
-        margin-top: 30px;
+        margin-top: 40px;
       }
 
       .footer-text a {
-        color: #4caf50;
+        color: #aaa;
         text-decoration: none;
         transition: color 0.3s ease;
       }
 
       .footer-text a:hover {
-        color: #45a049;
+        color: #fff;
+      }
+
+      .back-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .back-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
       }
     </style>
   </head>
   <body>
+    <a href="/" class="back-btn">← Back</a>
+
     <div class="login-container">
       <div class="login-header">
-        <div class="login-logo">📚</div>
-        <h1 class="login-title">KEEPLEARNING</h1>
-        <p class="login-subtitle">Hub</p>
+        <div class="login-emoji">⭕</div>
+        <h1 class="login-title">Yooo welcome back!</h1>
       </div>
 
       <form id="loginForm">
         <div class="error-message" id="errorMessage"></div>
 
         <div class="form-group">
-          <label for="username">Username</label>
+          <label for="username">username</label>
           <input
             type="text"
             id="username"
             name="username"
-            placeholder="Enter your username"
+            placeholder="Enter your Username"
             required
             autocomplete="off"
           />
@@ -245,20 +285,43 @@
             type="password"
             id="password"
             name="password"
-            placeholder="Enter your password"
+            placeholder="••••••••"
             required
             autocomplete="off"
           />
         </div>
 
-        <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
+        <button type="submit" class="login-btn" id="loginBtn">Sign in</button>
 
         <div class="loading" id="loadingIndicator">
           <span class="spinner"></span>Signing in...
         </div>
       </form>
 
-      <div class="footer-text">© 2025 KEEPLEARNING HUB • Made by Jay</div>
+      <div
+        style="
+          text-align: center;
+          margin-top: 20px;
+          font-size: 13px;
+          color: #666;
+        "
+      >
+      </div>
+
+      <div
+        style="
+          text-align: center;
+          margin-top: 30px;
+          padding-top: 20px;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          font-size: 12px;
+          color: #666;
+        "
+      </div>
+
+      <div class="footer-text">
+        crying is totally allowed during test.<br />
+      </div>
     </div>
 
     <script>
@@ -323,329 +386,3 @@
     </script>
   </body>
 </html>
-=======
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KEEPLEARNING HUB - Login</title>
-    <link rel="stylesheet" href="/static/style.css" />
-    <style>
-      body {
-        background: #1a1a1a;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      }
-
-      .login-container {
-        width: 100%;
-        max-width: 400px;
-        padding: 40px;
-        background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
-        border: 1px solid #444;
-        border-radius: 12px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-        animation: slideIn 0.5s ease-out;
-      }
-
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .login-header {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-
-      .login-logo {
-        width: 60px;
-        height: 60px;
-        margin: 0 auto 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #4caf50, #45a049);
-        border-radius: 12px;
-        font-size: 32px;
-        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-      }
-
-      .login-title {
-        font-size: 28px;
-        font-weight: bold;
-        color: #4caf50;
-        margin: 0;
-        letter-spacing: 1px;
-      }
-
-      .login-subtitle {
-        font-size: 12px;
-        color: #aaa;
-        margin: 8px 0 0 0;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-
-      .form-group {
-        margin-bottom: 20px;
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 13px;
-        font-weight: 600;
-        color: #bbb;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .form-group input {
-        width: 100%;
-        padding: 12px 16px;
-        background: #1a1a1a;
-        border: 1px solid #444;
-        border-radius: 6px;
-        color: #fff;
-        font-size: 14px;
-        transition: all 0.3s ease;
-        box-sizing: border-box;
-      }
-
-      .form-group input:focus {
-        outline: none;
-        border-color: #4caf50;
-        box-shadow: 0 0 10px rgba(76, 175, 80, 0.2);
-        background: #262626;
-      }
-
-      .form-group input::placeholder {
-        color: #666;
-      }
-
-      .login-btn {
-        width: 100%;
-        padding: 14px 20px;
-        background: linear-gradient(135deg, #4caf50, #45a049);
-        border: none;
-        border-radius: 6px;
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-      }
-
-      .login-btn:hover {
-        background: linear-gradient(135deg, #45a049, #3d8b40);
-        box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-        transform: translateY(-2px);
-      }
-
-      .login-btn:active {
-        transform: translateY(0);
-      }
-
-      .error-message {
-        display: none;
-        padding: 12px 16px;
-        background: #ff6b6b;
-        border: 1px solid #ff5252;
-        border-radius: 6px;
-        color: #fff;
-        font-size: 13px;
-        margin-bottom: 20px;
-        animation: shake 0.5s ease-in-out;
-      }
-
-      .error-message.show {
-        display: block;
-      }
-
-      @keyframes shake {
-        0%,
-        100% {
-          transform: translateX(0);
-        }
-        25% {
-          transform: translateX(-5px);
-        }
-        75% {
-          transform: translateX(5px);
-        }
-      }
-
-      .loading {
-        display: none;
-        text-align: center;
-        color: #4caf50;
-        font-size: 13px;
-        margin-top: 10px;
-      }
-
-      .loading.show {
-        display: block;
-      }
-
-      .spinner {
-        display: inline-block;
-        width: 4px;
-        height: 4px;
-        background: #4caf50;
-        border-radius: 50%;
-        margin-right: 6px;
-        animation: spin 1.2s infinite;
-      }
-
-      @keyframes spin {
-        0%,
-        100% {
-          opacity: 0.3;
-        }
-        50% {
-          opacity: 1;
-        }
-      }
-
-      .footer-text {
-        text-align: center;
-        font-size: 12px;
-        color: #666;
-        margin-top: 30px;
-      }
-
-      .footer-text a {
-        color: #4caf50;
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-
-      .footer-text a:hover {
-        color: #45a049;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="login-container">
-      <div class="login-header">
-        <div class="login-logo">📚</div>
-        <h1 class="login-title">KEEPLEARNING</h1>
-        <p class="login-subtitle">Hub</p>
-      </div>
-
-      <form id="loginForm">
-        <div class="error-message" id="errorMessage"></div>
-
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Enter your username"
-            required
-            autocomplete="off"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            required
-            autocomplete="off"
-          />
-        </div>
-
-        <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
-
-        <div class="loading" id="loadingIndicator">
-          <span class="spinner"></span>Signing in...
-        </div>
-      </form>
-
-      <div class="footer-text">© 2025 KEEPLEARNING HUB • Made by Jay</div>
-    </div>
-
-    <script>
-      const form = document.getElementById("loginForm");
-      const usernameInput = document.getElementById("username");
-      const passwordInput = document.getElementById("password");
-      const loginBtn = document.getElementById("loginBtn");
-      const errorMessage = document.getElementById("errorMessage");
-      const loadingIndicator = document.getElementById("loadingIndicator");
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        // Clear previous error
-        errorMessage.classList.remove("show");
-        errorMessage.textContent = "";
-
-        // Show loading
-        loginBtn.disabled = true;
-        loadingIndicator.classList.add("show");
-
-        const username = usernameInput.value.trim();
-        const password = passwordInput.value;
-
-        try {
-          const response = await fetch("/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              username: username,
-              password: password,
-            }),
-          });
-
-          const data = await response.json();
-
-          if (response.ok && data.success) {
-            // Redirect to exams page
-            window.location.href = "/exams";
-          } else {
-            // Show error
-            errorMessage.textContent =
-              data.message || "Invalid username or password";
-            errorMessage.classList.add("show");
-            passwordInput.value = "";
-            passwordInput.focus();
-          }
-        } catch (error) {
-          console.error("Error:", error);
-          errorMessage.textContent = "An error occurred. Please try again.";
-          errorMessage.classList.add("show");
-        } finally {
-          loginBtn.disabled = false;
-          loadingIndicator.classList.remove("show");
-        }
-      });
-
-      // Focus on first input on page load
-      usernameInput.focus();
-    </script>
-  </body>
-</html>
->>>>>>> cd2f4aee2e9ec31cc816fab479d648db4b76f4da
