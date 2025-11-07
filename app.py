@@ -340,6 +340,34 @@ def library_set_exam():
     exam_session = {'questions': data['questions'], 'answers': {}}
     return jsonify({'message': 'Exam loaded from library'}), 200
 
+# --- Library Delete Endpoint ---
+@app.route('/library/delete', methods=['POST'])
+@login_required
+def library_delete():
+    data = request.json
+    if not data or 'filename' not in data:
+        return jsonify({'error': 'Invalid data'}), 400
+    
+    filename = data.get('filename', '')
+    if not filename:
+        return jsonify({'error': 'No filename provided'}), 400
+    
+    try:
+        # Delete the document file
+        doc_path = os.path.join(LIBRARY_FOLDER, secure_filename(filename))
+        if os.path.exists(doc_path):
+            os.remove(doc_path)
+        
+        # Delete the metadata JSON
+        meta_path = os.path.join(LIBRARY_META_FOLDER, secure_filename(filename) + '.json')
+        if os.path.exists(meta_path):
+            os.remove(meta_path)
+        
+        return jsonify({'message': 'Document deleted successfully'}), 200
+    except Exception as e:
+        print(f"Error deleting document: {e}")
+        return jsonify({'error': f'Failed to delete: {str(e)}'}), 500
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
