@@ -1,0 +1,30 @@
+{
+  "filename": "pydevsample.docx",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which of the following is used to define a function in Python?\n(a) func\n(b) define\n(c) def\n(d) function",
+      "type": "descriptive",
+      "correct_answer": "def"
+    },
+    {
+      "id": 2,
+      "question": "Python supports object-oriented programming. True or False",
+      "type": "true_false",
+      "correct_answer": "True"
+    },
+    {
+      "id": 3,
+      "question": "The output of\u00a0print(2 ** 3)\u00a0is _____",
+      "type": "fill_blank",
+      "correct_answer": "8"
+    },
+    {
+      "id": 4,
+      "question": "Explain the purpose of the\u00a0__init__\u00a0method in Python classes.",
+      "type": "fill_blank",
+      "correct_answer": "The\u00a0__init__\u00a0method is a constructor in Python classes that initializes object attributes when an instance is created."
+    }
+  ],
+  "uploaded_at": "2025-11-07T22:33:47.553541"
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Question Extractor - About</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="/static/img/keepllogo.png" alt="keepllogo" height="" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="/exams">Exams</a></li>
+        <li><a href="/library">Library</a></li>
+        <li><a href="/results">Results</a></li>
+        <li><a href="/about" class="active">About</a></li>
+        <li><a href="/logout" class="logout-link">Logout</a></li>
+      </ul>
+    </nav>
+    <main>
+      <section class="about-section">
+        <h1>About</h1>
+        <div class="about-box">
+          <h2>KeepLearninghub.Exams</h2>
+          <p>
+            This application is custom made for the members of keep learning
+            team.
+          </p>
+          <ul>
+            <li>
+              <strong>Purpose:</strong> To take practice tests online easily.
+            </li>
+            <li>
+              <strong>Technologies:</strong> Python, HTML, CSS, JavaScript
+            </li>
+            <li><strong>Developer:</strong> Jay</li>
+          </ul>
+        </div>
+        <section>
+          <h2>Handelling format</h2>
+          <pre>
+  1. What is the capital of France?
+  (a) Berlin
+  (b) Paris
+  (c) Rome
+  (d) Madrid
+  Answer: Paris
+
+  2. Water boils at 100°C. True or False
+  Answer: True
+
+  3. The chemical symbol for water is _____
+  Answer: H2O
+
+  4. Explain the process of photosynthesis.
+  Answer: Photosynthesis is the process by which green plants convert sunlight into energy.
+          </pre>
+        </section>
+      </section>
+    </main>
+    <footer>
+      <span>© 2025 Made by Jay</span>
+    </footer>
+    <script>
+      // Fade-in/fade-out and scroll transitions
+      document.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add("fade-in");
+        // Fade-out on navigation
+        document.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function (e) {
+            if (
+              link.target !== "_blank" &&
+              link.href &&
+              link.href.indexOf(location.host) !== -1
+            ) {
+              e.preventDefault();
+              document.body.classList.remove("fade-in");
+              document.body.classList.add("fade-out");
+              setTimeout(function () {
+                window.location.href = link.href;
+              }, 350);
+            }
+          });
+        });
+        // Section fade-in on scroll
+        const fadeSections = document.querySelectorAll(".section-fade");
+        function handleSectionFade() {
+          fadeSections.forEach(function (section) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 60) {
+              section.classList.add("visible");
+            }
+          });
+        }
+        window.addEventListener("scroll", handleSectionFade);
+        handleSectionFade();
+      });
+    </script>
+  </body>
+</html>

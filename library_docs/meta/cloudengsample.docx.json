@@ -1,0 +1,30 @@
+{
+  "filename": "cloudengsample.docx",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which of the following is a type of cloud service model?\n(a) SaaS\n(b) PaaS\n(c) IaaS\n(d) All of the above",
+      "type": "descriptive",
+      "correct_answer": "All of the above"
+    },
+    {
+      "id": 2,
+      "question": "Cloud computing allows users to access resources remotely over the internet. True or False",
+      "type": "true_false",
+      "correct_answer": "True"
+    },
+    {
+      "id": 3,
+      "question": "The process of scaling resources up or down based on demand is called _____",
+      "type": "fill_blank",
+      "correct_answer": "Auto-scaling"
+    },
+    {
+      "id": 4,
+      "question": "Explain the difference between public and private cloud.",
+      "type": "descriptive",
+      "correct_answer": "A public cloud is hosted and managed by a third-party provider, accessible over the internet, while a private cloud is dedicated to a single organization for more control and security."
+    }
+  ],
+  "uploaded_at": "2025-11-07T22:33:31.496107"
+}

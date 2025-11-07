@@ -1,0 +1,57 @@
+
+Which of the following uniquely identifies each record in a database table?
+A. Foreign Key
+B. Primary Key
+C. Unique Key
+D. Composite Key
+Answer: B
+In SQL, the __________ clause is used to filter records before grouping.
+Answer: WHERE
+True or False: The DELETE command removes the table structure as well as the data.
+Answer: False
+Write an SQL query to display all employee names and their assigned task titles.
+Answer: SELECT EMPLOYEE.Employee_Name, TASK.Task_Title FROM EMPLOYEE JOIN TASK ON EMPLOYEE.Employee_ID = TASK.Employee_ID;
+The process of organizing data to eliminate redundancy is called __________.
+Answer: Normalization
+True or False: A FOREIGN KEY in one table references a PRIMARY KEY in another.
+Answer: True
+Which SQL command is used to permanently delete a table from the database?
+A. DELETE TABLE
+B. REMOVE TABLE
+C. DROP TABLE
+D. ERASE TABLE
+Answer: C
+Describe the relationship between CLIENT and TASK tables in your ERP database.
+Answer: One CLIENT can have many TASKS; each TASK is linked to one CLIENT through a foreign key.
+Which SQL clause is used to sort query results in ascending or descending order?
+A. ORDER BY
+B. GROUP BY
+C. SORT
+D. FILTER
+Answer: A
+True or False: A NULL value means the field contains zero.
+Answer: False
+The command used to add a new column in an existing table is __________.
+Answer: ALTER TABLE
+Explain the difference between DELETE and TRUNCATE commands.
+Answer: DELETE removes specific rows and can use conditions; TRUNCATE removes all rows but keeps the structure.
+Which table should contain details like “Task_Name,” “Deadline,” and “Status”?
+A. CLIENT
+B. TASK
+C. EMPLOYEE
+D. DETAILED_STATUS
+Answer: B
+True or False: The PRIMARY KEY in the CLIENT table can also appear as a FOREIGN KEY in the TASK table.
+Answer: True
+__________ is used to retrieve unique values from a column in SQL.
+Answer: DISTINCT
+Write an SQL command to find all clients located in “Chennai.”
+Answer: SELECT * FROM CLIENT WHERE City = 'Chennai';
+What is the purpose of indexing in a database?
+Answer: To increase the speed of data retrieval operations.
+True or False: In a normalized database, data duplication is intentionally increased to improve access speed.
+Answer: False
+Define ACID properties in the context of database transactions.
+Answer: ACID stands for Atomicity, Consistency, Isolation, and Durability — ensuring reliable transaction processing.
+Write a short note on how your ERP system maintains data integrity using constraints.
+Answer: The ERP system uses PRIMARY KEY and FOREIGN KEY constraints to maintain relationships and prevent inconsistent data entries between tables like CLIENT, EMPLOYEE, and TASK.

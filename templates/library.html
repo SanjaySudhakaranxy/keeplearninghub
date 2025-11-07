@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Library</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="/static/img/keepllogo.png" alt="Keepi Logo" height="32" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="/exams">Exams</a></li>
+        <li><a href="/library" class="active">Library</a></li>
+        <li><a href="/results">Results</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/logout" class="logout-link">Logout</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section class="upload-section">
+        <h1>Test Library</h1>
+        <p>
+          Upload test documents or select previously saved tests to take them.
+        </p>
+
+        <div class="upload-box">
+          <h2>Upload New Test Document</h2>
+          <form id="uploadForm" enctype="multipart/form-data">
+            <label for="file" class="file-label">
+              <span>📄 Upload Test Document (.docx, .txt)</span>
+              <input
+                type="file"
+                id="file"
+                name="file"
+                accept=".docx,.txt"
+                required
+              />
+            </label>
+            <button type="submit" class="extract-btn">Upload</button>
+          </form>
+          <div class="error-message" id="uploadError"></div>
+        </div>
+
+        <hr style="margin: 30px 0; opacity: 0.3" />
+
+        <div class="upload-box">
+          <h2>Take a Test from Library</h2>
+          <div id="selectTestSection">
+            <label for="testSelect">Select a Test:</label>
+            <select
+              id="testSelect"
+              style="
+                padding: 8px;
+                margin: 10px 0;
+                width: 100%;
+                max-width: 400px;
+              "
+            >
+              <option value="">-- Choose a test --</option>
+            </select>
+            <br />
+            <button
+              id="startTestBtn"
+              onclick="startTest()"
+              class="extract-btn"
+              disabled
+            >
+              Start Test →
+            </button>
+          </div>
+        </div>
+
+        <hr style="margin: 30px 0; opacity: 0.3" />
+
+        <h2>Available Library Documents</h2>
+        <div id="libraryList" style="margin-top: 15px">Loading...</div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2025 Made by Jay</span>
+    </footer>
+    <script>
+      // Upload document
+      document.getElementById("uploadForm").onsubmit = async function (e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("file", document.getElementById("file").files[0]);
+        const res = await fetch("/library/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await res.json();
+        if (res.ok) {
+          alert("Upload successful!");
+          document.getElementById("uploadForm").reset();
+          loadLibrary();
+        } else {
+          document.getElementById("uploadError").textContent =
+            "Upload failed: " + (data.error || "Unknown error");
+        }
+      };
+
+      // Load library documents and populate dropdown
+      async function loadLibrary() {
+        const res = await fetch("/library/list");
+        const data = await res.json();
+        const listDiv = document.getElementById("libraryList");
+        const testSelect = document.getElementById("testSelect");
+
+        if (data.library && data.library.length > 0) {
+          // Populate dropdown
+          testSelect.innerHTML =
+            '<option value="">-- Choose a test --</option>';
+          data.library.forEach((doc) => {
+            const option = document.createElement("option");
+            option.value = doc.filename;
+            option.textContent = `${doc.filename} (${doc.questions.length} questions)`;
+            testSelect.appendChild(option);
+          });
+          testSelect.addEventListener("change", function () {
+            document.getElementById("startTestBtn").disabled =
+              this.value === "";
+          });
+
+          // Display library list
+          listDiv.innerHTML = "";
+          data.library.forEach((doc) => {
+            const docDiv = document.createElement("div");
+            docDiv.className = "library-doc";
+            docDiv.style.cssText =
+              "background: #1a1a1a; padding: 12px; margin: 10px 0; border-radius: 6px; border-left: 4px solid #0099ff;";
+            docDiv.innerHTML = `<strong style="color: #0099ff;">${
+              doc.filename
+            }</strong> 
+                    <span style="color: #888; font-size: 0.9em;">(${
+                      doc.questions.length
+                    } questions)</span><br>
+                    <small style="color: #aaa;">Uploaded: ${new Date(
+                      doc.uploaded_at
+                    ).toLocaleString()}</small><br><br>
+                    <button onclick="showQuestions('${
+                      doc.filename
+                    }')" style="padding: 6px 12px; background: #0099ff; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Questions</button>`;
+            listDiv.appendChild(docDiv);
+          });
+        } else {
+          listDiv.innerHTML = "No documents in library.";
+        }
+      }
+
+      // Show questions for a document
+      async function showQuestions(filename) {
+        const res = await fetch("/library/list");
+        const data = await res.json();
+        const doc = data.library.find((d) => d.filename === filename);
+        if (doc) {
+          let html = `<h3>Questions from ${doc.filename}</h3><ol>`;
+          doc.questions.forEach((q) => {
+            html += `<li><strong>Q${q.id}:</strong> ${q.question}<br><em>Type:</em> ${q.type}<br><em>Answer:</em> ${q.correct_answer}</li>`;
+          });
+          html += "</ol>";
+          document.getElementById("libraryList").innerHTML =
+            html +
+            '<br><button onclick="loadLibrary()">Back to Library</button>';
+        }
+      }
+
+      // Start test with selected document
+      async function startTest() {
+        const filename = document.getElementById("testSelect").value;
+        if (!filename) {
+          alert("Please select a test");
+          return;
+        }
+
+        const res = await fetch("/library/list");
+        const data = await res.json();
+        const doc = data.library.find((d) => d.filename === filename);
+
+        if (doc) {
+          // Store questions in session and navigate to exam page
+          await fetch("/library/set-exam", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ questions: doc.questions }),
+          });
+          window.location.href = "/exam";
+        }
+      }
+
+      // Initial load
+      loadLibrary();
+    </script>
+  </body>
+  <script>
+    // Fade-in/fade-out and scroll transitions
+    document.addEventListener("DOMContentLoaded", function () {
+      document.body.classList.add("fade-in");
+      // Fade-out on navigation
+      document.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function (e) {
+          if (
+            link.target !== "_blank" &&
+            link.href &&
+            link.href.indexOf(location.host) !== -1
+          ) {
+            e.preventDefault();
+            document.body.classList.remove("fade-in");
+            document.body.classList.add("fade-out");
+            setTimeout(function () {
+              window.location.href = link.href;
+            }, 350);
+          }
+        });
+      });
+      // Section fade-in on scroll
+      const fadeSections = document.querySelectorAll(".section-fade");
+      function handleSectionFade() {
+        fadeSections.forEach(function (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 60) {
+            section.classList.add("visible");
+          }
+        });
+      }
+      window.addEventListener("scroll", handleSectionFade);
+      handleSectionFade();
+    });
+  </script>
+</html>
