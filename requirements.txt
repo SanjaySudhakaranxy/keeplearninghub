@@ -1,7 +1,3 @@
-<<<<<<< HEAD
+
 flask
 python-docx
-=======
-flask
-python-docx
->>>>>>> cd2f4aee2e9ec31cc816fab479d648db4b76f4da
